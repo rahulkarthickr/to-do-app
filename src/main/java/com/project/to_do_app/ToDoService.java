@@ -2,6 +2,9 @@ package com.project.to_do_app;
 import com.project.to_do_app.entities.ToDo;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +18,10 @@ public class ToDoService {
     }
     public ToDo getToDoId(long id) {
         return toDoRepo.findById(id).orElseThrow(() -> new RuntimeException("ToDo not found with id " + id));
+    }
+    public Page<ToDo> getAllToDoPages(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return toDoRepo.findAll(pageable);
     }
     public List<ToDo> getAllToDos() {
         return toDoRepo.findAll();

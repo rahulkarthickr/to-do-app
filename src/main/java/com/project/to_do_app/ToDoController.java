@@ -1,6 +1,8 @@
 package com.project.to_do_app;
 
 import com.project.to_do_app.entities.ToDo;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,6 +29,13 @@ public class ToDoController {
         //   return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         //  }
     }
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved data"),
+            @ApiResponse(responseCode = "400", description = "Invalid request"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "404", description = "Resource not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping("/{id}")
     ResponseEntity<ToDo> getToDoId(@PathVariable long id) {
         try {
@@ -36,14 +45,28 @@ public class ToDoController {
         catch (Exception e) {
             // log.info("Error");
             // log.warn("Warning");
-            log.error("Error: ", e);
+            // log.error("Error: ", e);
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved data"),
+            @ApiResponse(responseCode = "400", description = "Invalid request"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "404", description = "Resource not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping("/page")
     ResponseEntity<Page<ToDo>> getToDoPages(@RequestParam int page, @RequestParam int size) {
         return new ResponseEntity<>(toDoService.getAllToDoPages(page, size), HttpStatus.OK);
     }
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successfully retrieved data"),
+            @ApiResponse(responseCode = "400", description = "Invalid request"),
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+            @ApiResponse(responseCode = "404", description = "Resource not found"),
+            @ApiResponse(responseCode = "500", description = "Internal server error")
+    })
     @GetMapping("/list")
     ResponseEntity<List<ToDo>> getAllToDo() {
         return new ResponseEntity<List<ToDo>>(toDoService.getAllToDos(), HttpStatus.OK);

@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -15,14 +16,14 @@ public class ToDoController {
     @Autowired
     private ToDoService toDoService;
     @PostMapping("/create")
-    ResponseEntity<ToDo> createUser(@RequestBody ToDo todo) {
-        try {
+    ResponseEntity<ToDo> createUser(@Valid @RequestBody ToDo todo) {
+         // try {
             ToDo createdToDo = toDoService.createToDo(todo);
             return new ResponseEntity<>((createdToDo), HttpStatus.OK);
-        }
-        catch(Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-        }
+         // }
+         // catch(Exception e) {
+        //   return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        //  }
     }
     @GetMapping("/{id}")
     ResponseEntity<ToDo> getToDoId(@PathVariable long id) {
@@ -43,14 +44,13 @@ public class ToDoController {
         return new ResponseEntity<List<ToDo>>(toDoService.getAllToDos(), HttpStatus.OK);
     }
     @PutMapping("/update")
-    ResponseEntity<ToDo> updateUser(@RequestBody ToDo todo) {
-        try {
+    ResponseEntity<ToDo> updateUser(@Valid @RequestBody ToDo todo) {
+         // try {
             ToDo updatedToDo = toDoService.updateToDo(todo);
             return new ResponseEntity<>((updatedToDo), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
-
-        }
+         // } catch (Exception e) {
+         //     return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        //    }
     }
     @DeleteMapping("/delete/{id}")
     void DeleteUser(@PathVariable long id) {

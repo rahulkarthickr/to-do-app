@@ -1,6 +1,7 @@
 package com.project.to_do_app;
 
 import com.project.to_do_app.entities.ToDo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/to-do")
+@Slf4j // Logging
 public class ToDoController {
     @Autowired
     private ToDoService toDoService;
@@ -32,6 +34,9 @@ public class ToDoController {
             return new ResponseEntity<>((getToDo), HttpStatus.OK);
         }
         catch (Exception e) {
+            // log.info("Error");
+            // log.warn("Warning");
+            log.error("Error: ", e);
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
     }

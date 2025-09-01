@@ -8,6 +8,9 @@ import jakarta.validation.constraints.NotBlank;
 
 
 @Entity
+// @Data - Constructors, Getters, Setters
+// @AllArgsConstructor
+// @NoArgsConstructor
 public class ToDo {
     @Id
     @GeneratedValue
@@ -21,6 +24,21 @@ public class ToDo {
     Boolean isCompleted;
     @Email
     String email;
+
+    // AllArgsConstructor
+//    public ToDo(Long id, String title, String description, Boolean isCompleted, String email) {
+//        this.id = id;
+//        this.title = title;
+//        this.description = description;
+//        this.isCompleted = isCompleted;
+//        this.email = email;
+//    }
+
+    // NoArgsConstructor
+//    public ToDo() {
+//
+//    }
+
     public Long getId() {
         return id;
     }

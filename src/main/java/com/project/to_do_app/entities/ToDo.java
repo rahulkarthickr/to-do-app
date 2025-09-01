@@ -1,5 +1,6 @@
 package com.project.to_do_app.entities;
 
+// import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -15,6 +16,7 @@ public class ToDo {
     @Id
     @GeneratedValue
     Long id;
+    // @Schema(name = "ToDo", example = "CRUD API")
     @NotBlank(message = "Title should not be blank")
     String title;
     @NotBlank(message = "Description should not be blank")
